@@ -6,6 +6,7 @@ var targetQuote = document.querySelector('.poster-quote');
 var posterForm = document.querySelector('.poster-form');
 var mainPoster = document.querySelector('.main-poster');
 var savedPoster = document.querySelector('.saved-posters');
+var savedPosterGrid = document.querySelector('.saved-posters-grid');
 
 var showFormBtn = document.querySelector('.show-form');
 var showSavedBtn = document.querySelector('.show-saved');
@@ -19,6 +20,7 @@ var ownTitle = document.getElementById('poster-title');
 var ownImage = document.getElementById('poster-image-url');
 var ownQuote = document.getElementById('poster-quote');
 
+var count = 0;
 
 
 
@@ -137,7 +139,17 @@ savePosterBtn.addEventListener('click', addToArray);
 
 // functions and event handlers go here 👇
 
-
+function displaySavedPosters() {
+  for(var i = count; i < savedPosters.length; i++){
+    savedPosterGrid.innerHTML +=
+    `<section class = "mini-poster">
+      <img class="img" src="${savedPosters[i].imageURL}">
+      <h2 class="title">${savedPosters[i].title}</h1>
+      <h3 class="quote">${savedPosters[i].quote}</h3>
+     </section>`
+     count++;
+    }
+}
 function savePoster(event) {
   event.preventDefault();
   titles.push(ownTitle.value);
@@ -159,6 +171,7 @@ function makeOwnPoster() {
 };
 
 function viewSaved() {
+  displaySavedPosters();
   savedPoster.classList.toggle('hidden');
   mainPoster.classList.toggle('hidden');
 };
