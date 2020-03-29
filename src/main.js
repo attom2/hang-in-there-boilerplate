@@ -136,10 +136,13 @@ backToMainBtn.addEventListener('click', takeMeBack);
 randomBtn.addEventListener('click', randomPoster);
 showMyPosterBtn.addEventListener('click', savePoster);
 savePosterBtn.addEventListener('click', addToArray);
+if (document.getElementById('0') != undefined) {
+  document.getElementById('0').addEventListener('click', deleteMiniPoster);
+}
 // functions and event handlers go here 👇
 
 function deleteMiniPoster(i) {
-   document.getElementById('${i}').remove();
+   document.getElementById(`${i}`).remove();
 }
 
 function displaySavedPosters() {
