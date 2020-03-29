@@ -136,26 +136,34 @@ backToMainBtn.addEventListener('click', takeMeBack);
 randomBtn.addEventListener('click', randomPoster);
 showMyPosterBtn.addEventListener('click', savePoster);
 savePosterBtn.addEventListener('click', addToArray);
-
 // functions and event handlers go here 👇
+
+function deleteMiniPoster(i) {
+   document.getElementById('${i}').remove();
+}
 
 function displaySavedPosters() {
   for(var i = count; i < savedPosters.length; i++){
     savedPosterGrid.innerHTML +=
-    `<section class = "mini-poster">
+    `<section class = "mini-poster" id = ${count}>
       <img class="img" src="${savedPosters[i].imageURL}">
       <h2 class="title">${savedPosters[i].title}</h1>
       <h3 class="quote">${savedPosters[i].quote}</h3>
      </section>`
      count++;
+     // addClickable(count);
     }
 }
+// function addClickable(count) {
+//   document.getElementById(count).addEventListener('click', alert);
+// }
 function savePoster(event) {
   event.preventDefault();
   titles.push(ownTitle.value);
   images.push(ownImage.value);
   quotes.push(ownQuote.value);
   currentPoster = new Poster(ownImage.value, ownTitle.value, ownQuote.value);
+  currentPoster.id = 0;
   updatePoster();
   takeMeBack();
 };
@@ -181,6 +189,7 @@ function takeMeBack() {
   savedPoster.classList.add('hidden');
   posterForm.classList.add('hidden');
 };
+
 
 // function addToArray() {
 //   if (!savedPosters.includes(currentPoster)){
