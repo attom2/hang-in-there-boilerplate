@@ -136,46 +136,79 @@ backToMainBtn.addEventListener('click', takeMeBack);
 randomBtn.addEventListener('click', randomPoster);
 showMyPosterBtn.addEventListener('click', savePoster);
 savePosterBtn.addEventListener('click', addToArray);
-if (document.getElementById('0') != undefined) {
-  document.getElementById('0').addEventListener('click', deleteMiniPoster);
-}
+
 // functions and event handlers go here 👇
 
-function deleteMiniPoster(i) {
-   document.getElementById(`${i}`).remove();
+function deleteMiniPoster() {
+
 }
 
 function displaySavedPosters() {
   for(var i = count; i < savedPosters.length; i++){
     savedPosterGrid.innerHTML +=
-    `<section class = "mini-poster" id = ${count}>
+    `<section class = "mini-poster" id = "${count}"">
       <img class="img" src="${savedPosters[i].imageURL}">
       <h2 class="title">${savedPosters[i].title}</h1>
       <h3 class="quote">${savedPosters[i].quote}</h3>
      </section>`
+
      count++;
-     // addClickable(count);
+
     }
+    addClickable();
 }
-// function addClickable(count) {
-//   document.getElementById(count).addEventListener('click', alert);
+// function addClickable(id) {
+//   //for (var i = 0; i < savedPosters.length; i++){
+//     if (document.getElementById(`${id}`) != undefined) {
+//       document.getElementById(`${id}`).addEventListener('dblclick', function() {
+//       document.getElementById(`${id}`).remove();
+//       });
+//       // Use Splice to remove the object from savedPosters at index i
+//   }
 // }
+function addClickable() {
+    if (document.getElementById(`0`) != undefined) {
+      document.getElementById(`0`).addEventListener('dblclick', function() {
+      document.getElementById(`0`).remove();
+      });
+    }
+    if (document.getElementById(`1`) != undefined) {
+      document.getElementById(`1`).addEventListener('dblclick', function() {
+      document.getElementById(`1`).remove();
+      });
+    }
+    if (document.getElementById(`2`) != undefined) {
+      document.getElementById(`2`).addEventListener('dblclick', function() {
+      document.getElementById(`2`).remove();
+      });
+    }
+    if (document.getElementById(`3`) != undefined) {
+      document.getElementById(`3`).addEventListener('dblclick', function() {
+      document.getElementById(`3`).remove();
+      });
+    }
+      //Use Splice to remove the object from savedPosters at index i
+
+}
+
 function savePoster(event) {
   event.preventDefault();
   titles.push(ownTitle.value);
   images.push(ownImage.value);
   quotes.push(ownQuote.value);
   currentPoster = new Poster(ownImage.value, ownTitle.value, ownQuote.value);
-  currentPoster.id = 0;
+
   updatePoster();
   takeMeBack();
+
 };
 
 function updatePoster() {
   targetTitle.innerText = currentPoster.title;
   targetImage.src = currentPoster.imageURL;
   targetQuote.innerText = currentPoster.quote;
-}
+};
+
 function makeOwnPoster() {
   mainPoster.classList.toggle('hidden');
   posterForm.classList.toggle('hidden');
@@ -183,6 +216,7 @@ function makeOwnPoster() {
 
 function viewSaved() {
   displaySavedPosters();
+
   savedPoster.classList.toggle('hidden');
   mainPoster.classList.toggle('hidden');
 };
