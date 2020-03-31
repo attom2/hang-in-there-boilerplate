@@ -20,8 +20,6 @@ var ownTitle = document.getElementById('poster-title');
 var ownImage = document.getElementById('poster-image-url');
 var ownQuote = document.getElementById('poster-quote');
 
-var count = 0;
-
 
 
 // we've provided you with some data to work with 👇
@@ -122,11 +120,7 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-var savedPosters = [{imageUrl: "a", title: "b", quote: "c"}, 
-{imageUrl: "ads", title: "bsa", quote: "dd"}, 
-{imageUrl: "as", title: "bssadsa", quote: "dddss"}];
-
-// var savedPosters = [];
+var savedPosters = [];
 
 var currentPoster;
 
@@ -141,136 +135,85 @@ showMyPosterBtn.addEventListener('click', savePoster);
 savePosterBtn.addEventListener('click', addToArray);
 
 // functions and event handlers go here 👇
-
-function deleteMiniPoster() {
-
-}
+randomPoster();
 
 function displaySavedPosters() {
-  savedPosterGrid.innerHTML = ""
-  for(var i = 0; i < savedPosters.length; i++){
+  savedPosterGrid.innerHTML = "";
+  for(var i = 0; i < savedPosters.length; i++) {
     savedPosterGrid.innerHTML +=
     `<section class = "mini-poster" id = "${i}">
       <img class="img" src="${savedPosters[i].imageURL}">
       <h2 class="title">${savedPosters[i].title}</h2>
       <h3 class="quote">${savedPosters[i].quote}</h3>
      </section>`
-    }
+  }
   for(var i = 0; i < savedPosters.length; i++) {
-  addClickable(savedPosters[i], i);
+    addClickable(savedPosters[i], i);
   }
 }
 
 function addClickable(poster, id) {
-  //for (var i = 0; i < savedPosters.length; i++){
-    if (document.getElementById(`${id}`) != undefined) {
-      document.getElementById(`${id}`).addEventListener('dblclick', function() {
-      document.getElementById(`${id}`).remove();
-      savedPosters = savedPosters.filter(function(p){return p != poster})
-    })
+  if (document.getElementById(`${id}`) != undefined) {
+    document.getElementById(`${id}`).addEventListener('dblclick', function() {
+    document.getElementById(`${id}`).remove();
+    savedPosters = savedPosters.filter(function(p){return p != poster});
+    });
   }
 }
 
-
-      // Use Splice to remove the object from savedPosters at index i
-
-// function addClickable() {
-//     if (document.getElementById(`0`) != undefined) {
-//       document.getElementById(`0`).addEventListener('dblclick', function() {
-//       document.getElementById(`0`).remove();
-//       });
-//     }
-//     if (document.getElementById(`1`) != undefined) {
-//       document.getElementById(`1`).addEventListener('dblclick', function() {
-//       document.getElementById(`1`).remove();
-//       });
-//     }
-//     if (document.getElementById(`2`) != undefined) {
-//       document.getElementById(`2`).addEventListener('dblclick', function() {
-//       document.getElementById(`2`).remove();
-//       });
-//     }
-//     if (document.getElementById(`3`) != undefined) {
-//       document.getElementById(`3`).addEventListener('dblclick', function() {
-//       document.getElementById(`3`).remove();
-//       });
-//     }
-      //Use Splice to remove the object from savedPosters at index i
-
-// }
-//
 function savePoster(event) {
   event.preventDefault();
   titles.push(ownTitle.value);
   images.push(ownImage.value);
   quotes.push(ownQuote.value);
   currentPoster = new Poster(ownImage.value, ownTitle.value, ownQuote.value);
-
   updatePoster();
   takeMeBack();
-   count++;
-
-};
+  count++;
+}
 
 function updatePoster() {
   targetTitle.innerText = currentPoster.title;
   targetImage.src = currentPoster.imageURL;
   targetQuote.innerText = currentPoster.quote;
-};
+}
 
 function makeOwnPoster() {
   mainPoster.classList.toggle('hidden');
   posterForm.classList.toggle('hidden');
-};
+}
 
 function viewSaved() {
   displaySavedPosters();
-
   savedPoster.classList.toggle('hidden');
   mainPoster.classList.toggle('hidden');
-};
+}
 
 function takeMeBack() {
   mainPoster.classList.remove('hidden');
   savedPoster.classList.add('hidden');
   posterForm.classList.add('hidden');
-};
-
-
-// function addToArray() {
-//   if (!savedPosters.includes(currentPoster)){
-//     savedPosters.push(currentPoster);
-//   };
-//
-// };
+}
 
 function addToArray() {
   for (var i = 0; i < savedPosters.length; i++) {
     if (isEquivalent(currentPoster, savedPosters[i])) {
-    return;
+      return;
     }
   }
   savedPosters.push(currentPoster);
 }
 
-function isEquivalent(a, b) {
-  if (a.imageURL == b.imageURL && a.title == b.title && a.quote == b.quote) {
-    return true;
-  } else {
-    return false;
-  }
+function isEquivalent(posterOne, posterTwo) {
+  return posterOne.imageURL == posterTwo.imageURL && posterOne.title == posterTwo.title && posterOne.quote == posterTwo.quote;
 }
 
 function randomPoster() {
   targetTitle.innerText = titles[getRandomIndex(titles)];
   targetImage.src = images[getRandomIndex(images)];
   targetQuote.innerText = quotes[getRandomIndex(quotes)];
-};
+}
 
-randomPoster();
-
-//poster.src = 'https://fr.cdn.v5.futura-sciences.com/builds/images/thumbs/4/4e1f8098cf_Chilesaurus_diegosuarezi_2__University_of_Birmingham.jpg';
-// (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
-};
+}
