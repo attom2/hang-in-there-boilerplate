@@ -1,6 +1,45 @@
 # Hang In There
 
-A boilerplate repo. 
+**Contributors**
+
+Andy Tom, Katy St Sauveur
+
+**Project Description**
+
+This was a paired project that was designed to create motivational posters randomly using images, titles and quotes.  You could also add, save and remove posters that you created on your own.  The posters can be viewed in a browser.
+
+**Project Goals**
+
+Create a functioning website with the use of HTML, CSS and JavaScript.
+Use variables, event listeners and functions to allow navigation through the webpage.
+Attempt to have the most clean JavaScript and refactor whenever possible with a goal of readability.
+Become familiar with the use of GitHub and branching when working on a paired project.
+
+**Challenges**
+
+Mastering the GitHub workflow with many branches.
+Although our code was functional, we knew that we needed to refactor to make the code more readable.
+Some of the extensions that we implemented created bugs in other portions of the completed project.
+
+**Wins**
+
+A good, respectful working partnership.
+Completed base requirements for the project.
+Attempted to add extensions including single randomization of posters and local storage.
+Refactoring was successful on many of our more complicated functions.
+
+**Programming Languages Used**
+
+HTML
+CSS
+JavaScript
+
+## In Action
+
+**Functionality of Main Screen**
+
+![Button Functionality](https://media.giphy.com/media/H3vZ6FCP4PzbmhwnoM/giphy.gif)
+
 
 ## Set Up
 
@@ -74,6 +113,5 @@ You are welcome to add your own extensions. Be sure they are thoughtful in terms
 - In the main poster view, allow users to click each piece of the poster (image, title, quote) to update just that piece with another random item from the appropriate array
 - When a user single clicks a saved poster, create a modal to view it larger
 - Allow users to drag and drop saved posters into whatever order they want them to appear
-
 
 Project spec & rubric can be found [here](https://frontend.turing.io/projects/module-1/hang-in-there.html)
