@@ -2,11 +2,13 @@
 var targetTitle = document.querySelector('.poster-title');
 var targetImage = document.querySelector('.poster-img');
 var targetQuote = document.querySelector('.poster-quote');
+var singleRandom = document.querySelector('.poster')
 
 var posterForm = document.querySelector('.poster-form');
 var mainPoster = document.querySelector('.main-poster');
 var savedPoster = document.querySelector('.saved-posters');
 var savedPosterGrid = document.querySelector('.saved-posters-grid');
+
 
 var showFormBtn = document.querySelector('.show-form');
 var showSavedBtn = document.querySelector('.show-saved');
@@ -133,7 +135,17 @@ backToMainBtn.addEventListener('click', takeMeBack);
 randomBtn.addEventListener('click', randomPoster);
 showMyPosterBtn.addEventListener('click', savePoster);
 savePosterBtn.addEventListener('click', addToArray);
-
+singleRandom.addEventListener('dblclick', function(event) {
+    if (event.target.className == 'poster-title'){
+      event.target.innerText = titles[getRandomIndex(titles)];
+    }
+    else if (event.target.className == 'poster-quote'){
+      event.target.innerText = quotes[getRandomIndex(quotes)];
+    }
+    else if (event.target.className == 'poster-img'){
+      event.target.src = images[getRandomIndex(images)];
+    }
+})
 // functions and event handlers go here 👇
 randomPoster();
 
@@ -142,24 +154,17 @@ function displaySavedPosters() {
   for(var i = 0; i < savedPosters.length; i++) {
     savedPosterGrid.innerHTML +=
     `<section class = "mini-poster" id = "${i}">
-      <img class="img" src="${savedPosters[i].imageURL}">
-      <h2 class="title">${savedPosters[i].title}</h2>
-      <h3 class="quote">${savedPosters[i].quote}</h3>
+      <img class="img" id = "${i}" src="${savedPosters[i].imageURL}">
+      <h2 class="title" id = "${i}">${savedPosters[i].title}</h2>
+      <h3 class="quote" id = "${i}">${savedPosters[i].quote}</h3>
      </section>`
   }
-  for(var i = 0; i < savedPosters.length; i++) {
-    addClickable(savedPosters[i], i);
-  }
+  savedPosterGrid.addEventListener('dblclick', function(event) {
+    document.getElementById(event.target.id).remove();
+    savedPosters.splice(event.target.id,1);
+  });
 }
 
-function addClickable(poster, id) {
-  if (document.getElementById(`${id}`) != undefined) {
-    document.getElementById(`${id}`).addEventListener('dblclick', function() {
-    document.getElementById(`${id}`).remove();
-    savedPosters = savedPosters.filter(function(p){return p != poster});
-    });
-  }
-}
 
 function savePoster(event) {
   event.preventDefault();
@@ -169,7 +174,6 @@ function savePoster(event) {
   currentPoster = new Poster(ownImage.value, ownTitle.value, ownQuote.value);
   updatePoster();
   takeMeBack();
-  count++;
 }
 
 function updatePoster() {
